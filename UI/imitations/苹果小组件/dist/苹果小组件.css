@@ -1,0 +1,66 @@
+body {
+  font-size: 16px;
+  font-family: Calibri, "Microsoft YaHei UI", SansSerif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: #e5e5e5;
+}
+
+p {
+  font-size: 0.8em;
+}
+
+div::-webkit-scrollbar {
+  width: 0;
+}
+
+.iphone-11-pro {
+  width: 375px;
+  min-height: 812px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.ipad {
+  width: 834px;
+  min-height: 1194px;
+  background: white;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.con-list {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.con-list > div {
+  margin: 0 8px 16px;
+  border-radius: 21.67px;
+  background-clip: border-box;
+  background-color: #e5e5e5;
+}
+.con-list .s {
+  width: 155px;
+  height: 155px;
+}
+.con-list .m {
+  width: 329px;
+  height: 155px;
+}
+.con-list .l {
+  width: 329px;
+  height: 345px;
+}

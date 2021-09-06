@@ -1,0 +1,13 @@
+.iphone-11-pro {
+  width: 375px;
+  min-height: 812px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.ipad {
+  width: 834px;
+  min-height: 1194px;
+  background: white;
+  box-sizing: border-box;
+}

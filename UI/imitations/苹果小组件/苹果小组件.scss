@@ -1,0 +1,46 @@
+@import './common/common.scss';
+
+// 标题
+h2 {
+    margin: 0;
+    padding-top: 20px;
+    text-align: center;
+}
+
+// 组件列表
+.con-list {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    
+    // 组件基本样式
+    > div {
+        margin: 0 8px 16px;
+        border-radius: 21.67px;
+
+        background-clip: border-box;
+        background-color: #e5e5e5;
+    }
+    // 小
+    .s {
+        width: 155px;
+        height: 155px;
+    }
+    // 中
+    .m {
+        width: 329px;
+        height: 155px;
+    }
+    // 大
+    .l {
+        width: 329px;
+        height: 345px;
+    }
+}
+
+ 

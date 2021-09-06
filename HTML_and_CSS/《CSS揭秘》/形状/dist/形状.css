@@ -1,0 +1,103 @@
+body {
+  font-size: 16px;
+  font-family: Calibri, "Microsoft YaHei UI", SansSerif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 1.2em;
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+}
+
+p {
+  font-size: 0.8em;
+}
+
+div::-webkit-scrollbar {
+  width: 0;
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: none;
+}
+
+[class^=shape] {
+  background: #665555;
+  width: 5em;
+  height: 5em;
+}
+
+.shape1 {
+  width: 10em;
+  height: 7em;
+  border-radius: 50%;
+}
+
+.shape2 {
+  width: 10em;
+  height: 7em;
+  border-radius: 50%/100% 100% 0 0;
+}
+
+.shape3 {
+  width: 10em;
+  height: 7em;
+  border-radius: 100% 0 0/100% 0 0;
+}
+
+.shape4 {
+  position: relative;
+}
+
+.shape4::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: #665555;
+  transform: skew(45deg);
+}
+
+.shape5 {
+  transform: rotate(45deg);
+  overflow: hidden;
+}
+
+.shape5 > img {
+  max-width: 100%;
+  transform: rotate(-45deg) scale(2);
+}
+
+.shape6 {
+  background: linear-gradient(to top right, transparent 1em, #cc917a 0) left, linear-gradient(to top left, transparent 1em, #91cc7a 0) right;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+}
+
+.shape7 {
+  background: radial-gradient(circle at top left, transparent 1em, white 0);
+}
+
+.shape8 {
+  position: relative;
+  background-color: transparent;
+}
+.shape8::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #665555;
+  transform-origin: bottom;
+  transform: perspective(0.5em) rotateX(2deg);
+}
