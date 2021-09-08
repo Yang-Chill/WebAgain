@@ -1,0 +1,32 @@
+body {
+  font-size: 16px;
+  font-family: Calibri, "Microsoft YaHei UI", SansSerif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: #e5e5e5;
+}
+
+p {
+  font-size: 0.8em;
+}
+
+div::-webkit-scrollbar {
+  width: 0;
+}
+
+.iphone-11-pro {
+  width: 375px;
+  min-height: 812px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.ipad {
+  width: 834px;
+  min-height: 1194px;
+  background: white;
+  box-sizing: border-box;
+}
