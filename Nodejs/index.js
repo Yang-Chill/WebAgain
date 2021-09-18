@@ -5,6 +5,8 @@ const Hello = require('./hello');
 const server = require('./server');
 const router = require("./router");
 const util = require('util');
+const child_process = require('child_process');
+const mysql= require('mysql');
 
 // 异步回调
 function test1() {
@@ -69,7 +71,7 @@ function test2() {
         console.log("find error")
     };
     try {
-        // 没用监听器会报异常
+        // 没监听器会报异常
         eventEmitter.emit('error');
     } catch {
         console.log("error event need a listener");
@@ -80,7 +82,7 @@ function test2() {
     console.log("程序执行完毕。");
 
 }
-//test2();
+// test2();
 
 // Buffer缓冲区
 function test3() {
@@ -240,13 +242,14 @@ function test7() {
 }
 //test7();
 
+
 // 全局对象
 function test8() {
 
     // 当前执行脚本的文件名
     console.log(__filename);
     // 当前执行脚本的所在目录
-    console.log(_dirname);
+    console.log(__dirname);
 
     // 定时执行一次
     let t = setTimeout(() => {
@@ -255,13 +258,23 @@ function test8() {
 
     clearTimeout(t);
 
+    let i = 0
     // 循环执行
-    setInterval(() => {
+    let interval = setInterval(() => {
         console.log("这是全局函数setInterval");
-    }, 1000)
+        i++;
+        if (i > 5) {
+            clearInterval(interval);
+        }
+    }, 1000);
+
+    process.stdout.write("hello, here is process.stdout");
+    console.log(process.platform);
+
 
 }
-//test8();
+// test8();
+
 
 // 工具
 function test9() {
@@ -289,6 +302,7 @@ function test9() {
         this.name = 'sub';
     }
 
+
     // 实现继承原型
     util.inherits(Sub, Base);
 
@@ -300,6 +314,10 @@ function test9() {
     objSub.showName();
     //objSub.sayHello(); 
     console.log(objSub);
+
+    // 任意对象转换为字符串
+    console.log(util.inspect(objBase));
+    console.log(util.inspect(objBase, true));
 
 }
 //test9();
@@ -390,20 +408,102 @@ function test10() {
     });
 
     // 删除
-    fs.unlink('./another.txt', function(err) {
+    fs.unlink('./another.txt', function (err) {
         if (err) {
             console.error(err);
         } else {
             console.log("文件删除成功！");
         }
-     });
+    });
 
     // 创建、读取和删除目录
 
 }
 //test10();
 
-// Web模块
+// 多进程
 function test11() {
-    
+
+    // exec()方法
+    for (let i = 0; i < 3; i++) {
+
+        // 参数：将要运行的命令字符串，options配置（可选），回调函数
+        // 返回最大的缓冲区，等进程结束一次性返回内容
+        let workerProcess = child_process.exec('node support.js ' + i, function (error, stdout, stderr) {
+            if (error) {
+                console.log(error.stack);
+                console.log('Error code: ' + error.code);
+                console.log('Signal received: ' + error.signal);
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+        });
+
+        workerProcess.on('exit', function (code) {
+            console.log('子进程已经退出，退出码：' + code);
+        });
+    }
+
+    // spawn()方法
+    for (let i = 0; i < 3; i++) {
+        // 参数：将要运行的命令字符串，字符串数组（可选），options配置（可选）
+        // 返回流（stdout&stderr），在进程返回大量数据时使用，进程开始即接收响应
+        let workerProcess = child_process.spawn('node', ['support.js', i]);
+
+        workerProcess.stdout.on('data', function (data) {
+            console.log('stdout: ' + data);
+        });
+        workerProcess.stderr.on('data', function (data) {
+            console.log('stderr: ' + data);
+        });
+
+        workerProcess.on('close', function (code) {
+            console.log('子进程已经退出，退出码：' + code);
+        });
+    }
+
+    // fork()方法（spawn的特殊形式）
+    for (var i = 0; i < 3; i++) {
+        // 参数：将要运行的模块路径，字符串数组（可选），options配置（可选）
+        // 返回的对象出来拥有ChildProcess所有方法，还有内建通信信道
+        var worker_process = child_process.fork("support.js", [i]);
+
+        worker_process.on('close', function (code) {
+            console.log('子进程已退出，退出码 ' + code);
+        });
+    }
+
 }
+// test11();
+
+// mysql
+function test12() {
+
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'ych3137sk8',
+        database: 'todo_list'
+    });
+
+    // 这里会连接出错，说是版本不匹配，解决方案是mysql重新设立个密码
+    // alter user 'root'@'localhost' identified with mysql_native_password by '*******';
+    // flush privileges
+    connection.connect( err => {
+        if(err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("connect success");
+        }
+    });
+
+    connection.query('select * from user', function(error, results, fields){
+        if(error) throw error;
+        console.log('The solution is: ', results);
+    });
+
+    
+
+}
+test12();
