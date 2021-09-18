@@ -1,4 +1,5 @@
 .vscode/
+dist
 Projects
 playground.js
 playground.html
