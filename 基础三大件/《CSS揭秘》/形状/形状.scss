@@ -1,0 +1,147 @@
+@import '../public/scss/common.scss';
+body {
+    background-image: linear-gradient(to right top, #4a5b6a, #536a7b, #5b7a8d, #638a9e, #6b9baf, #72a4b9, #79acc3, #80b5cd, #88b7d2, #91bad6, #99bcda, #a2bede);
+}
+.list {
+    height: 90vh;
+    overflow: auto;
+}
+
+.list-item {
+    position: relative;
+    z-index: 1;
+    width: 80%;
+    box-sizing: border-box;
+    margin: 1.5em auto;
+    padding: 1em;
+    border-radius: .8em;
+    box-shadow: .1em .1em 1em .1em rgba(0,0,0,0.2);
+    background: linear-gradient(110.97deg, rgba(255, 255, 255, 0.5) -4.87%, rgba(255, 255, 255, 0) 103.95%);
+
+    display: flex;
+}
+
+[class^='shape'] {
+    background: #665555;
+    width: 5em;
+    height: 5em;
+    margin-right: 3em;
+}
+
+
+.shape1 {
+    width: 10em;
+    height: 7em;
+    border-radius: 50%;
+}
+
+.shape2 {
+    width: 10em;
+    height: 7em;
+    border-radius: 50% / 100% 100% 0 0;
+}
+
+.shape3 {
+    width: 10em;
+    height: 7em;
+    border-radius: 100% 0 0 / 100% 0 0;
+}
+
+.shape4 {
+    position: relative;
+}
+
+.shape4::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: #665555;
+    transform: skew(45deg);
+}
+
+.shape5 {
+    transform: rotate(45deg);
+    overflow: hidden;
+}
+
+.shape5>img {
+    max-width: 100%;
+    transform: rotate(-45deg) scale(2);
+}
+
+.shape6 {
+    background:
+        linear-gradient(to top right, transparent 1em, #cc917a 0) left,
+        linear-gradient(to top left, transparent 1em, #91cc7a 0) right;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+}
+
+.shape7 {
+    background:
+        radial-gradient(circle at top left, transparent 1em, white 0);
+}
+
+.shape8 {
+    position: relative;
+    background-color: transparent;
+    padding: .5em 1em .35em;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;right: 0;bottom: 0;left: 0;
+        z-index: -1;
+
+        background-color: #665555;
+        transform-origin: bottom;
+        transform: scaleY(1.3) perspective(.5em) rotateX(2deg);
+    }
+    p {
+        margin: 0;
+        color: white;
+        font-size: 2em;
+        font-weight: 600;
+        text-align: center;
+    }
+}
+
+@keyframes spin {
+    to {transform: rotate(.5turn);}
+}
+@keyframes bg {
+    50% {background: blue;}
+}
+
+.shape9 {
+    border-radius: 50%;
+    background: yellow;
+    background-image: linear-gradient(to right, transparent 50%, red 0);
+    &::before {
+        content: '';
+        display: block;
+        margin-left: 50%;
+        height: 100%;
+
+        border-radius: 0 100% 100% 0 / 50%;
+        background-color: blue;
+        transform-origin: left;
+        
+        animation: spin 50s linear infinite, bg 100s step-end infinite;
+        animation-play-state: paused;
+        animation-delay: inherit;
+    }
+}
+
+.shape10 {
+    box-shadow: 0 1em .8em -.8em black;
+}
+.shape11 {
+    box-shadow: 1em 1em 1.4em -1em black;
+}
+.shape12 {
+    box-shadow: 1em 0 .8em -.8em black, -1em 0 .8em -.8em black;
+}
